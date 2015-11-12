@@ -1,0 +1,20 @@
+CREATE KEYSPACE test1
+  WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 3 };
+ 
+use test1;
+  
+CREATE TABLE users (user_id uuid primary key, name text, email text, phone list<text>,
+					address map<text,text>, residency_status text);
+					
+CREATE INDEX on users(residency_status);
+
+CREATE KEYSPACE test2
+  WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
+  
+use test2;
+
+CREATE TABLE employee(employee_id uuid, fname text, lname text, email text, gender text, 
+	country text, primary key((gender,  country)));
+
+
+
